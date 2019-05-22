@@ -29,4 +29,19 @@ router.post("/task", (req, res) => {
     }
 })
 
+router.delete('/task/:id', (req, res)=>{
+    Task.destroy({
+        where:{
+            id: req.params.id
+        }
+    })
+    .then(()=>{
+        res.send("Task Deleted!")
+    })
+    .catch(error =>{
+        res.send("error: " +error)
+    })
+})
+
+
 module.exports = router
