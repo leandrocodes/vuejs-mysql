@@ -21,7 +21,7 @@ router.post("/task", (req, res) => {
     } else {
         Task.create(req.body)
             .then(() => {
-                res.send("Task added")
+                res.send("Task added with success")
             })
             .catch(err => {
                 res.send("Error: " + err)
