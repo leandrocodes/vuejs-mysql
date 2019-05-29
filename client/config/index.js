@@ -15,8 +15,8 @@ module.exports = {
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     proxyTable: {
       '/api': {
-        target: 'localhost:3000',
-        changeOrigin: true
+        target: 'http://localhost:3030',
+        chagneOrigin: true
       }
     },
     autoOpenBrowser: false,

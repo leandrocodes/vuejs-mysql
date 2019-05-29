@@ -2,7 +2,7 @@
   "name": "client",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "Leandro <leandrocodes@github.com>",
+  "author": "",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
@@ -14,7 +14,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "bootstrap": "^4.3.1",
+    "bootstrap": "^4.2.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
