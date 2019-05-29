@@ -32,29 +32,72 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios"
 
 export default {
-    data(){
-        return{
-            todos: [],
-            id: '',
-            taskname: '',
-            isEdit: false
-        }
-    },
-    mounted(){
-        this.getTasks();
-    },
-    methods:{
-        getTasks(){
-            axios.get("/api/tasks").then( result=>{
-                console.log(result.data)
-                this.todos = result.data
+	data() {
+		return {
+			todos: [],
+			id: "",
+			taskname: "",
+			isEdit: false
+		}
+	},
+	created() {
+		this.getTasks()
+	},
+	methods: {
+		getTasks() {
+			axios.get("/api/tasks").then(
+				result => {
+					console.log(result.data)
+					this.todos = result.data
+				},
+				error => {
+					console.log(error)
+				}
+			)
+        },
+        addNewTask() {
+            axios.post("/api/task", {task_name: this.taskname})
+                .then((res)=>{
+                    this.taskname = ''
+                    this.getTasks()
+                }).catch((err) =>{
+                    console.log(err)
+                })
+        },
+        editTask(title, id){
+            this.id = id
+            this.taskname = title
+            this.isEdit = true
+        },
+        updateTask(){
+            axios.put(`/api/task/${this.id}`, 
+            {task_name: this.taskname})
+                .then((res)=>{
+                    this.taskname = ''
+                    this.isEdit = false
+                    this.getTasks()
+                    console.log(res)
+                })
+                .catch((err)=>{
+                    console.log(err)
+                })
+        },
+        deleteTask(id){
+            axios.delete(`/api/task/${id}`)
+            .then((res)=>{
+                this.taskname = ''
+                this.getTasks()
+                console.log(res)
+            })
+            .catch((err)=>{
+                console.log(err)
             })
         }
-    }
-};
+	}
+}
 </script>
 
 <style>
