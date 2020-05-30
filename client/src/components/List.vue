@@ -30,17 +30,10 @@
             </button>
           </form>
           <table class="table">
-            <tr
-              v-for="todo in todos"
-              v-bind:key="todo.id"
-              v-bind:taskname="todo.task_name"
-            >
-              <td class="text-left">{{ todo.task_name }}</td>
+            <tr v-for="todo in todos" v-bind:key="todo.id" v-bind:taskname="todo.name">
+              <td class="text-left">{{ todo.name }}</td>
               <td class="text-right">
-                <button
-                  class="btn btn-info"
-                  @click="editTask(todo.task_name, todo.id)"
-                >
+                <button class="btn btn-info" @click="editTask(todo.name, todo.id)">
                   Edit
                 </button>
                 <button class="btn btn-danger" @click="deleteTask(todo.id)">
@@ -55,7 +48,7 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+import axios from 'axios'
 // console.error()
 // import {error} from 'util'
 
@@ -63,67 +56,67 @@ export default {
   data() {
     return {
       todos: [],
-      id: "",
-      taskname: "",
-      isEdit: false,
-    };
+      id: '',
+      taskname: '',
+      isEdit: false
+    }
   },
   mounted() {
-    this.getTasks();
+    this.getTasks()
   },
   methods: {
     getTasks() {
-      axios.get("/api/task").then(
-        (result) => {
-          console.log(result.data);
-          this.todos = result.data;
+      axios.get('/api/task').then(
+        result => {
+          console.log(result.data)
+          this.todos = result.data
         },
-        (error) => {
-          console.error(error);
+        error => {
+          console.error(error)
         }
-      );
+      )
     },
     addNewTask() {
       axios
-        .post("/api/task", { task_name: this.taskname })
-        .then((res) => {
-          this.taskname = "";
-          this.getTasks();
+        .post('/api/task', { name: this.taskname })
+        .then(res => {
+          this.taskname = ''
+          this.getTasks()
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch(err => {
+          console.log(err)
+        })
     },
     editTask(taskname, id) {
-      this.id = id;
-      this.taskname = taskname;
-      this.isEdit = true;
+      this.id = id
+      this.taskname = taskname
+      this.isEdit = true
     },
     updateTask() {
       axios
-        .put(`/api/task/${this.id}`, { task_name: this.taskname })
-        .then((res) => {
-          this.taskname = "";
-          this.isEdit = false;
-          this.getTasks();
-          console.log(res);
+        .put(`/api/task/${this.id}`, { name: this.taskname })
+        .then(res => {
+          this.taskname = ''
+          this.isEdit = false
+          this.getTasks()
+          console.log(res)
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch(err => {
+          console.log(err)
+        })
     },
     deleteTask(id) {
       axios
         .delete(`/api/task/${id}`)
-        .then((res) => {
-          this.taskname = "";
-          this.getTasks();
-          console.log(res);
+        .then(res => {
+          this.taskname = ''
+          this.getTasks()
+          console.log(res)
         })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-  },
-};
+        .catch(err => {
+          console.log(err)
+        })
+    }
+  }
+}
 </script>
