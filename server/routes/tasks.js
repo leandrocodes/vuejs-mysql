@@ -2,6 +2,13 @@ var express = require('express')
 var router = express.Router()
 const Task = require('../model/Task')
 
+const leandro = (nome, frontEndDev) => {
+	return {
+		nome,
+		leandro
+	}
+}
+
 // Get  All Task
 router.get('/', (req, res) => {
   res.json('hi')

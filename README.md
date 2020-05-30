@@ -2,9 +2,9 @@
 
 ## **Features**
 
-- Insert Tasks
+- Create Tasks
 - Read Tasks
-- Upadate Tasks
+- Update Tasks
 - Delete Tasks
 
 ## Task Model
